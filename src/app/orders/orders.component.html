@@ -1,0 +1,87 @@
+<!-- Name input -->
+<div *ngIf="nameDiv" style="text-align:center">
+<label for="fname">Name:</label>
+<input #name style ="padding:2px" type="text" id="fname" name="fname" placeholder="Enter your name..."><br><br>
+<button (click)="getName(name)">Submit</button>
+</div>
+
+<br> <br>
+<button style="text-align:center" class="btn btn-primary" type="button" (click)="showMenu()">
+  Show Coffee Menu
+</button>
+
+<br><br>
+
+<!-- Menu Table -->
+<div *ngIf="menu">
+  <h6 style="text-align:center; color:blue">{{name}} : Add coffee to drink </h6>
+<table  class="table table-hover" style="width:100%">
+  
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Products/Add-on</th>
+        <th scope="col">Milk</th>
+        <th scope="col">Cream</th>
+        <th scope="col">Latte</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Espresso</th>
+        <td  class="types" #espmilk id="Espresso-Milk" (click)="getValue(espmilk)">60</td>
+        <td class="types" #espcream id="Espresso-Cream" (click)="getValue(espcream)">75</td>
+        <td  class="types" #esplatte id="Espresso-Latte" (click)="getValue(esplatte)">100</td>
+      </tr>
+      <tr>
+        <th scope="row">Cappaccino</th>
+        <td class="types"  #capmilk id="Cappaccino-Milk" (click)="getValue(capmilk)">80</td>
+        <td class="types"  #capcream id="Cappaccino-Cream" (click)="getValue(capcream)">90</td>
+        <td class="types"  #caplatte id="Cappaccino-Latte" (click)="getValue(caplatte)">125</td>
+      </tr>
+      <tr>
+        <th scope="row">Latte</th>
+        <td class="types" class="types"  #latmilk id="Latte-Milk" (click)="getValue(latmilk)">100</td>
+        <td class="types" class="types"  #latcream id="Latte-Cream" (click)="getValue(latcream)">125</td>
+        <td class="types" class="types"  #latlatte id="Latte-latte" (click)="getValue(latlatte)">150</td>
+      </tr>
+    </tbody>
+  </table>
+  <br><br>
+  
+  <!-- Bill -->
+  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">View Bill</button>
+  
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+      <h5 id="offcanvasRightLabel">Customer Name: {{name}}</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" ></button>
+    </div>
+    <div class="offcanvas-body" >
+     <h3>Order details</h3>
+     <table class="table table-hov table-bordered mt-3"style="width:75%">
+      <thead class="thead-dark">
+        <tr>
+          <th >SNo.</th>
+          <th scope="col">Coffee </th>
+          <th scope="col">Cost</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td class= "userId" scope="row" >{{order.sno+1}}</td>
+          <td >{{order.type}}</td>
+          <td>{{order.cost}}</td>
+          <td>
+              <button type="button" class="btn btn-danger mx-4" (click)="deleteOrder(order.sno)"> Delete</button>
+          </td>
+         </tr>
+      </tbody>
+        
+     </table>
+      <h4>Total Amount(in Rs) :{{total}}</h4>
+    </div>
+  </div>
+</div>
+
+
